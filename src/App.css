@@ -32,7 +32,35 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.MainView {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "header header"
+    "navbar main"
+    "navbar footer";
+  grid-template-columns: auto 1fr;
+}
+
+.header {
+  grid-area: header;
+}
+
+.navbar {
+  grid-area: navbar;
+}
+
+.main {
+  grid-area: main;
+}
+
+.footer {
+  grid-area: footer;
 }
