@@ -11,16 +11,15 @@ import { WelcomeView } from '../../components/welcome/WelcomeView';
 import { NewItemsView } from '../../components/newItems/NewItemsView';
 import { selectShowProductDetails } from '../../store/selectedProductSlice';
 import { ProductDetailsView } from '../../components/productDetails/ProductDetailsView';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { ItemsView } from '../../components/electronics/ItemsView';
 
 export const MainView = () => {
-
   const dispatch: AppDispatch = useDispatch();
   const showProductDetails = useSelector(selectShowProductDetails);
   const products = useSelector((state: RootState) =>
     Object.values(state.products.entities)
   );
-
-  console.log('products', products[0]);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -28,25 +27,35 @@ export const MainView = () => {
 
   return (
     <div className="MainView bg-gradient-to-t from-white to-black">
-      <div className="header">
-        <HeaderView />
-      </div>
-      <div className="navbar">
-        <NavbarView />
-      </div>
-      <div className="flex flex-col p-16 main relative w-full">
-        {showProductDetails ? (
-          <ProductDetailsView />
-        ) : (
-          <>
-            <WelcomeView />
-            <NewItemsView />
-          </>
-        )}
-      </div>
-      <div className="footer">
-        <FooterView />
-      </div>
+      <Router>
+        <div className="header">
+          <HeaderView />
+        </div>
+        <div className="navbar">
+          <NavbarView />
+        </div>
+        <div className="flex flex-col p-16 main relative w-full">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                showProductDetails ? (
+                  <ProductDetailsView />
+                ) : (
+                  <>
+                    <WelcomeView />
+                    <NewItemsView />
+                  </>
+                )
+              }
+            />
+            <Route path="/products" element={<ItemsView />} />
+          </Routes>
+        </div>
+        <div className="footer">
+          <FooterView />
+        </div>
+      </Router>
     </div>
   );
 };

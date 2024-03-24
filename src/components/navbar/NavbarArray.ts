@@ -7,7 +7,7 @@ export const navbarArray = [
         icon: icon_1, text: 'Home', active: true, id: 0
     },
     {
-        icon: icon_2, text: 'Electronics', active: false, id: 1
+        icon: icon_2, text: 'Products', active: false, id: 1
     },
     {
         icon: icon_3, text: 'About', active: false, id: 2

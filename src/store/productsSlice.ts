@@ -1,8 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface Product {
-    [x: string]: any;
-    id: 1,
+    id: number,
     title: string,
     description: string,
     price: number,
@@ -12,7 +11,7 @@ export interface Product {
     brand: string,
     category: string,
     thumbnail: string,
-    images: string,
+    images: string[],
 }
 
 

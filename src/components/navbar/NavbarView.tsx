@@ -6,17 +6,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/index';
 import { selectButtons, setActiveButton } from '../../store/mainSlice';
 import { clearSelectedProduct } from '../../store/selectedProductSlice';
+import { useNavigate } from 'react-router';
 
 export const NavbarView: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
   const buttons = useSelector((state: RootState) => selectButtons(state));
 
   const handleProductClick = () => {
     dispatch(clearSelectedProduct());
+    navigate(`/`);
   };
 
   const handleActiveButton = (id: number) => {
     dispatch(setActiveButton({ id }));
+  };
+
+  const handleAllItems = () => {
+    navigate(`/products`);
   };
 
   return (
@@ -38,8 +45,9 @@ export const NavbarView: React.FC = () => {
               imgs={item.icon}
               className={`${item.active ? 'bg-slate-400' : 'bg-transparent'}`}
               onClick={() => {
-                handleActiveButton(item.id)
-                item.id === 0 && handleProductClick()
+                handleActiveButton(item.id);
+                item.id === 0 && handleProductClick();
+                item.id === 1 && handleAllItems();
               }}
             />
           </div>
