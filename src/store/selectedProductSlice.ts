@@ -20,15 +20,13 @@ export const selectedProductSlice = createSlice({
     reducers: {
         setSelectedProduct: (state, action: PayloadAction<Product>) => {
             state.selectedProduct = action.payload;
-            state.showProductDetails = true;
         },
         clearSelectedProduct: (state) => {
             state.selectedProduct = null;
-            state.showProductDetails = false;
         },
         setShowProductDetails: (state, action: PayloadAction<boolean>) => {
             state.showProductDetails = action.payload;
-        }
+        },
     }
 });
 

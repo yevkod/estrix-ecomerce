@@ -26,6 +26,10 @@ export const NavbarView: React.FC = () => {
     navigate(`/products`);
   };
 
+  const handleAbout = () => {
+    navigate(`/about`);
+  };
+
   return (
     <div className="bg-[#11101D] w-full h-full max-w-[260px] p-5">
       <div>
@@ -48,6 +52,7 @@ export const NavbarView: React.FC = () => {
                 handleActiveButton(item.id);
                 item.id === 0 && handleProductClick();
                 item.id === 1 && handleAllItems();
+                item.id === 2 && handleAbout();
               }}
             />
           </div>

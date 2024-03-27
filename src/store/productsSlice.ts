@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface Product {
+    [x: string]: any;
     id: number,
     title: string,
     description: string,
@@ -15,7 +16,7 @@ export interface Product {
 }
 
 
-export const fetchProducts = createAsyncThunk<Product[], undefined, { rejectValue: string }>(
+export const fetchProducts = createAsyncThunk<Product[], void, { rejectValue: string }>(
     'products/fetchProducts',
     async function (_, { rejectWithValue }) {
         const response = await fetch('https://dummyjson.com/products');
@@ -53,12 +54,13 @@ const productsSlice = createSlice({
             action.payload.forEach((product) => {
                 state.entities[product.id] = product;
             })
-            state.loading = true;
+            state.loading = false;
             state.error = null;
         },
         productsRequestFailed(state, action: PayloadAction<string>) {
             state.status = 'failed';
             state.error = action.payload;
+            state.loading = false;
         }
     },
     extraReducers: (builder) => {

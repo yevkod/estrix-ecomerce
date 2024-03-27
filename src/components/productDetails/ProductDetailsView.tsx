@@ -10,6 +10,7 @@ import { AppDispatch, RootState } from '../../store';
 import { Product } from '../../store/productsSlice';
 import { calculateDiscountedPrice } from '../../helpers';
 import { Button } from '../button/Button';
+import { deleteItemFromCart, setItemInCart } from '../../store/cartSlice';
 
 export const ProductDetailsView = () => {
   const selectedProduct = useSelector(selectSelectedProduct);
@@ -19,7 +20,11 @@ export const ProductDetailsView = () => {
     Object.values(state.products.entities)
   );
 
-  console.log('selectedProduct', selectedProduct?.images);
+  const addItemBasket = () => {
+    selectedProduct
+      ? dispatch(setItemInCart(selectedProduct))
+      : dispatch(deleteItemFromCart(cartState.itemsInCart.id));
+  };
 
   return (
     <div className="min-h-screen">
@@ -27,9 +32,7 @@ export const ProductDetailsView = () => {
         <div className="">
           <Carousel plugins={['arrows', 'infinite']}>
             {selectedProduct?.images?.map((image: string, index: number) => (
-              <>
-                <img key={index} src={image} alt={image} />
-              </>
+              <img key={index} src={image} alt={image} />
             ))}
           </Carousel>
         </div>
@@ -42,7 +45,6 @@ export const ProductDetailsView = () => {
             {selectedProduct?.description}
           </div>
           <div className="pt-5">
-            {}
             <StarRatings
               rating={selectedProduct?.rating}
               starDimension="23px"
@@ -64,8 +66,13 @@ export const ProductDetailsView = () => {
               $<div className="line-through">{selectedProduct?.price} $</div>
               <div className="flex items-center">
                 <Button
-                  text="Buy now"
-                  className="px-16 py-3 !bg-blue-500 !active:bg-blue-700 !hover:bg-blue-600"
+                  text={`${!selectedProduct ? 'Buy now' : 'Delete from cart'}`}
+                  className={`px-16 py-3 ${
+                    selectedProduct
+                      ? '!bg-gray-500 !active:bg-gray-700 !hover:bg-gray-600'
+                      : '!bg-blue-500 !active:bg-blue-700 !hover:bg-blue-600'
+                  } `}
+                  onClick={addItemBasket}
                 />
               </div>
             </div>

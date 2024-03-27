@@ -6,15 +6,18 @@ import StarRatings from 'react-star-ratings';
 import { setSelectedProduct } from '../../store/selectedProductSlice';
 import { Button } from '../button/Button';
 import { calculateDiscountedPrice } from '../../helpers';
+import { useNavigate } from 'react-router';
 
 export const NewItemsView = () => {
   const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
   const products = useSelector((state: RootState) =>
     Object.values(state.products.entities)
   );
 
   const handleProductClick = (product: Product) => {
     dispatch(setSelectedProduct(product));
+    navigate(`/items/${product.id}`);
   };
 
   return (
@@ -22,14 +25,14 @@ export const NewItemsView = () => {
       <div className="text-white text-[25px] mt-5 font-bold">New Arrivals</div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 max-w-[90rem] mt-8 mx-auto">
         {products.length > 0 &&
-          products?.[0].slice(0, 6)?.map((item: Product) => (
+          products[0].slice(0, 6)?.map((item: Product) => (
             <div
               className=""
               key={item.id}
               onClick={() => handleProductClick(item)}
             >
               <div
-                className="flex relative flex-col p-5 items-center w-full h-full min-h-[350px] hover:scale-105 transition-all cursor-pointer rounded-md bg-slate-700"
+                className="flex relative flex-col p-5 items-center w-full h-full min-h-[350px] hover:scale-105 transition-all cursor-pointer rounded-md bg-slate-700 text-white"
                 key={item.id}
               >
                 <div className="flex absolute right-7 top-3 font-bold text-[20px] bg-red-500 max-w-[40%] justify-center p-2 mt-5 items-center rounded-lg">
