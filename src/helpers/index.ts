@@ -10,3 +10,13 @@ export const calculateDiscountedPrice = (price: number, discountPercentage: numb
 };
 
 export const calcTotalPrice = (items: Product[]) => items.reduce((acc: number, item: Product) => (acc += item.price), 0);
+
+export const calcTotalPriceWithDiscount = (items: Product[]) => {
+    let totalPriceWithDiscount = 0;
+    items.forEach((item: Product) => {
+        const { price, discountPercentage } = item;
+        const { discountedPrice } = calculateDiscountedPrice(price, discountPercentage);
+        totalPriceWithDiscount += discountedPrice;
+    });
+    return totalPriceWithDiscount;
+};

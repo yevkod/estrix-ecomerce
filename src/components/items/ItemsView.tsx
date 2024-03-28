@@ -43,12 +43,15 @@ export const ItemsView = () => {
                   <div className="">-{item?.discountPercentage} %</div>
                 </div>
                 <div className="max-w-[100%]">
-                  <img className="max-w-[100%]" src={item.thumbnail} alt="" />
+                  <img
+                    className="max-w-[100%] h-40 w-full"
+                    src={item.thumbnail}
+                    alt=""
+                  />
                 </div>
                 <div className=" text-white font-medium text-xl pt-4">
                   {item.title}
                 </div>
-                <div className="pt-3 font-bold text-lg">{item.price} $</div>
                 <div className="pt-5">
                   <StarRatings
                     rating={item.rating}

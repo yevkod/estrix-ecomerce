@@ -39,7 +39,11 @@ export const NewItemsView = () => {
                   <div className="">-{item?.discountPercentage} %</div>
                 </div>
                 <div className="max-w-[100%]">
-                  <img className="max-w-[100%]" src={item.thumbnail} alt="" />
+                  <img
+                    className="max-w-[100%] h-40 object-fit"
+                    src={item.thumbnail}
+                    alt=""
+                  />
                 </div>
                 <div className=" text-white font-medium text-xl pt-4 ">
                   {item.title}

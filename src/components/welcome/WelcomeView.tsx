@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
 import Carousel, { autoplayPlugin } from '@brainhubeu/react-carousel';
 import { Product } from '../../store/productsSlice';
-import { url } from 'inspector';
+import bg from '../../assets/imgs/bg.jpg';
 
 export const WelcomeView = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -11,18 +11,29 @@ export const WelcomeView = () => {
     Object.values(state.products.entities)
   );
 
-  console.log('products Images', products);
-
   return (
-    <div className="w-full relative z-50 mt-14 max-w-[900px] mx-auto p-5 bg-[#C4C4C4] h-full max-h-[350px] rounded-md">
+    <div
+      className="relative z-50 max-w-[90rem] mt-12 mx-auto bg-gray-500 p-5 min-h-[350px] rounded-md"
+      style={{
+        backgroundImage: `url(${bg})`,
+        maxWidth: '100%',
+        display: 'flex',
+        backgroundSize: '100% 100%',
+        backgroundRepeat: 'no-repeat',
+        width: '100%',
+      }}
+    >
       <div className="flex flex-col absolute">
         <div className="text-left">
-          <span className="text-blue-700">WELCOME TO THE</span>
-          <br></br> eSTRIX Store
+          <span className="text-blue-700 text-3xl font-bold">
+            WELCOME TO THE <br></br>eSTRIX Store
+          </span>
         </div>
       </div>
-      <div className="text-left pt-10">Buy, Trade In and Sell your games</div>
-      <div className="flex flex-col max-w-[100%] relative">
+      <div className="text-left font-bold text-blue-700 pt-20">
+        Buy, Trade In and Sell your products
+      </div>
+      {/* <div className="flex flex-col max-w-[100%] relative">
         <Carousel
           plugins={[
             'infinite',
@@ -36,20 +47,13 @@ export const WelcomeView = () => {
           animationSpeed={1000}
         >
           {products.length > 0 &&
-            products?.map((product: Product) => (
-              <div
-                className="flex w-20 h-20 z-50"
-                style={{ backgroundColor: `url(${product.images?.[0]})` }}
-              >
-                {/* <img
-                  key={product.id}
-                  src={product?.images?.[0]}
-                  alt={product.title}
-                /> */}
+            products[0]?.map((product: Product) => (
+              <div className="flex w-full h-56 z-50">
+                <img src={product.thumbnail} alt="" className="w-64 h-56" />
               </div>
             ))}
         </Carousel>
-      </div>
+      </div> */}
     </div>
   );
 };

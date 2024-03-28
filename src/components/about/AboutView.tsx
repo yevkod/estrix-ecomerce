@@ -8,7 +8,7 @@ export const AboutView = () => {
       <div className="text-white text-[20px] font-bold">
         Get In Touch With Us
       </div>
-      <div className="text-gray-300">
+      <div className="text-gray-300 pt-3">
         For More Information About Our Product & Services. Please Feel Free To
         Drop Us<br></br> An Email. Our Staff Always Be There To Help You Out. Do
         Not Hesitate!
@@ -35,7 +35,7 @@ export const AboutView = () => {
             <div>
               <input
                 placeholder="Your name"
-                className="rounded-xl p-3 bg-gray-400 text-white placeholder:text-white"
+                className="rounded-xl p-3 bg-gray-400 text-white outline-none placeholder:text-white"
               />
             </div>
           </div>
@@ -44,7 +44,7 @@ export const AboutView = () => {
             <div>
               <input
                 placeholder="Email address"
-                className="rounded-xl p-3 bg-gray-400 text-white placeholder:text-white"
+                className="rounded-xl p-3 bg-gray-400 text-white outline-none placeholder:text-white"
               />
             </div>
           </div>
@@ -52,15 +52,15 @@ export const AboutView = () => {
             <div>Subject</div>
             <input
               placeholder="Subject"
-              className="rounded-xl p-3 bg-gray-400 text-white placeholder:text-white"
+              className="rounded-xl p-3 bg-gray-400 text-white outline-none placeholder:text-white"
             />
           </div>
           <div className="flex flex-col gap-3">
             <div>Message</div>
             <div>
-              <input
+              <textarea
                 placeholder="Message"
-                className="rounded-xl p-3 bg-gray-400 text-white placeholder:text-white"
+                className="rounded-xl p-3 bg-gray-400 text-white outline-none placeholder:text-white"
               />
             </div>
           </div>

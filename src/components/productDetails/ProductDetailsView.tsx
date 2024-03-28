@@ -26,6 +26,10 @@ export const ProductDetailsView = () => {
       : dispatch(deleteItemFromCart(cartState.itemsInCart.id));
   };
 
+  const productsBasket = useSelector(
+    (state: RootState) => state.cart.itemsInCart
+  );
+
   return (
     <div className="min-h-screen">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 max-w-[90rem] mx-auto">
@@ -66,9 +70,9 @@ export const ProductDetailsView = () => {
               $<div className="line-through">{selectedProduct?.price} $</div>
               <div className="flex items-center">
                 <Button
-                  text={`${!selectedProduct ? 'Buy now' : 'Delete from cart'}`}
+                  text={`${!productsBasket ? 'Buy now' : 'Delete from cart'}`}
                   className={`px-16 py-3 ${
-                    selectedProduct
+                    productsBasket
                       ? '!bg-gray-500 !active:bg-gray-700 !hover:bg-gray-600'
                       : '!bg-blue-500 !active:bg-blue-700 !hover:bg-blue-600'
                   } `}

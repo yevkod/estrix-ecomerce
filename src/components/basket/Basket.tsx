@@ -5,7 +5,11 @@ import { Button } from '../button/Button';
 import { Product } from '../../store/productsSlice';
 import { RootState } from '../../store';
 import { CartState } from '../../store/cartSlice';
-import { calcTotalPrice, calculateDiscountedPrice } from '../../helpers';
+import {
+  calcTotalPrice,
+  calcTotalPriceWithDiscount,
+  calculateDiscountedPrice,
+} from '../../helpers';
 import { useNavigate } from 'react-router';
 
 export const Basket = () => {
@@ -43,7 +47,7 @@ export const Basket = () => {
             ))}
           <div className="flex justify-between border-t-2 mt-10 pt-3 border-gray-500">
             <div className="">Total:</div>
-            <div>{calcTotalPrice(productsBasket)}$</div>
+            <div>{calcTotalPriceWithDiscount(productsBasket).toFixed(0)}$</div>
           </div>
           <div className="pt-5">
             <Button
