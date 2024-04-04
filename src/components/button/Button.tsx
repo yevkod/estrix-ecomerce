@@ -4,7 +4,7 @@ interface ButtonProps {
   text: string;
   imgs?: string;
   className?: string;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 export const Button = ({

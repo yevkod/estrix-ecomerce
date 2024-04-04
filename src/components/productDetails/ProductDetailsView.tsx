@@ -10,7 +10,11 @@ import { AppDispatch, RootState } from '../../store';
 import { Product } from '../../store/productsSlice';
 import { calculateDiscountedPrice } from '../../helpers';
 import { Button } from '../button/Button';
-import { deleteItemFromCart, setItemInCart } from '../../store/cartSlice';
+import {
+  deleteItemFromCart,
+  setItemInCart,
+  CartState,
+} from '../../store/cartSlice';
 
 export const ProductDetailsView = () => {
   const selectedProduct = useSelector(selectSelectedProduct);
@@ -19,16 +23,15 @@ export const ProductDetailsView = () => {
   const products = useSelector((state: RootState) =>
     Object.values(state.products.entities)
   );
-
-  const addItemBasket = () => {
-    selectedProduct
-      ? dispatch(setItemInCart(selectedProduct))
-      : dispatch(deleteItemFromCart(cartState.itemsInCart.id));
-  };
-
   const productsBasket = useSelector(
     (state: RootState) => state.cart.itemsInCart
   );
+
+  const handleItemBasket = (product: Product) => {
+    productsBasket.some((item) => item.id === product?.id)
+      ? dispatch(deleteItemFromCart(product?.id))
+      : dispatch(setItemInCart(product));
+  };
 
   return (
     <div className="min-h-screen">
@@ -57,7 +60,7 @@ export const ProductDetailsView = () => {
             />{' '}
           </div>
           <div className="flex flex-col">
-            <div className="flex font-bold text-[20px] bg-red-500 max-w-[20%] justify-center p-2 mt-5 items-center rounded-lg">
+            <div className="flex font-bold text-[20px] bg-red-500 max-w-[30%] justify-center p-2 mt-5 items-center rounded-lg">
               <div className="">-{selectedProduct?.discountPercentage} %</div>
             </div>
             <div className="flex gap-8 pt-5 items-center font-bold text-[20px]">
@@ -70,14 +73,22 @@ export const ProductDetailsView = () => {
               $<div className="line-through">{selectedProduct?.price} $</div>
               <div className="flex items-center">
                 <Button
-                  text={`${!productsBasket ? 'Buy now' : 'Delete from cart'}`}
+                  text={`${
+                    !productsBasket.some(
+                      (item) => item.id === selectedProduct?.id
+                    )
+                      ? 'Buy now'
+                      : 'Delete from cart'
+                  }`}
                   className={`px-16 py-3 ${
-                    productsBasket
+                    productsBasket.some(
+                      (item) => item.id === selectedProduct?.id
+                    )
                       ? '!bg-gray-500 !active:bg-gray-700 !hover:bg-gray-600'
                       : '!bg-blue-500 !active:bg-blue-700 !hover:bg-blue-600'
                   } `}
-                  onClick={addItemBasket}
-                />
+                  onClick={() => selectedProduct && handleItemBasket(selectedProduct)}
+                  />
               </div>
             </div>
           </div>

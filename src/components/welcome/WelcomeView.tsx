@@ -13,7 +13,7 @@ export const WelcomeView = () => {
 
   return (
     <div
-      className="relative z-50 max-w-[90rem] mt-12 mx-auto bg-gray-500 p-5 min-h-[350px] rounded-md"
+      className="relative z-50 !max-w-[90rem] mt-12 mx-auto bg-gray-500 p-5 min-h-[350px] rounded-md"
       style={{
         backgroundImage: `url(${bg})`,
         maxWidth: '100%',

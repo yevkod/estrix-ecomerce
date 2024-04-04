@@ -1,12 +1,20 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { Button } from '../button/Button';
-import { calcTotalPrice, calculateDiscountedPrice } from '../../helpers';
+import {
+  calcTotalPrice,
+  calcTotalPriceWithDiscount,
+  calculateDiscountedPrice,
+  randomOrderNumber,
+} from '../../helpers';
 import { Product } from '../../store/productsSlice';
 import { useNavigate } from 'react-router';
+import cancelButton from '../../assets/imgs/cancel.svg';
+import { deleteItemFromCart } from '../../store/cartSlice';
 
 export const OrderView = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const productsBasket = useSelector(
     (state: RootState) => state.cart.itemsInCart
@@ -18,6 +26,19 @@ export const OrderView = () => {
 
   const handleNavigateToMain = () => {
     navigate('/');
+  };
+
+  const handlePaymentNavigate = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    navigate(`/payment/${randomOrderNumber}`);
+  };
+
+  const handleCancelItem = (
+    e: React.MouseEvent<HTMLImageElement, MouseEvent>,
+    id: number
+  ) => {
+    e.stopPropagation();
+    dispatch(deleteItemFromCart(id));
   };
 
   return (
@@ -36,17 +57,25 @@ export const OrderView = () => {
       ) : (
         <div>
           <div className="flex justify-between border-b-2 p-3 mt-10 border-gray-500">
-            <div className="flex items-center font-bold text-[18px]">
-              Total:
+            <div className="flex text-white text-[25px] font-bold">
+              Your order: #{randomOrderNumber}
             </div>
-            <div className="flex items-center gap-5">
-              <div className="font-bold text-[18px]">
-                {calcTotalPrice(productsBasket)}$
+            <div className="flex items-center gap-3">
+              <div className="flex items-center font-bold text-[18px]">
+                Total:{' '}
               </div>
-              <Button
-                text="MAKE ORDER"
-                className="px-16 py-3 !bg-blue-500 justify-center !active:bg-blue-700 !hover:bg-blue-600"
-              />
+              <div className="flex items-center gap-5">
+                <div className="font-bold text-[18px]">
+                  {calcTotalPriceWithDiscount(productsBasket).toFixed(0)}$
+                </div>
+                <Button
+                  text="MAKE ORDER"
+                  className="px-16 py-3 !bg-blue-500 justify-center !active:bg-blue-700 !hover:bg-blue-600"
+                  onClick={(
+                    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+                  ) => handlePaymentNavigate(e)}
+                />
+              </div>
             </div>
           </div>
           <div className="flex flex-col gap-5 pt-5">
@@ -64,14 +93,24 @@ export const OrderView = () => {
                       {product?.title}
                     </div>
                   </div>
-                  <div className="text-[20px] font-bold">
-                    {product?.price &&
-                      product?.discountPercentage &&
-                      calculateDiscountedPrice(
-                        product.price,
-                        product.discountPercentage
-                      ).discountedPrice.toFixed(0)}
-                    $
+                  <div className="flex gap-4">
+                    <div className="text-[20px] font-bold">
+                      {product?.price &&
+                        product?.discountPercentage &&
+                        calculateDiscountedPrice(
+                          product.price,
+                          product.discountPercentage
+                        ).discountedPrice.toFixed(0)}
+                      $
+                    </div>
+                    <div className="flex cursor-pointer">
+                      <img
+                        className="flex w-4"
+                        src={cancelButton}
+                        alt=""
+                        onClick={(e) => handleCancelItem(e, product.id)}
+                      />
+                    </div>
                   </div>
                 </div>
               ))}

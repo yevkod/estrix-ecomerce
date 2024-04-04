@@ -7,6 +7,7 @@ import { setSelectedProduct } from '../../store/selectedProductSlice';
 import { Button } from '../button/Button';
 import { calculateDiscountedPrice } from '../../helpers';
 import { useNavigate } from 'react-router';
+import { deleteItemFromCart, setItemInCart } from '../../store/cartSlice';
 
 export const NewItemsView = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -14,10 +15,21 @@ export const NewItemsView = () => {
   const products = useSelector((state: RootState) =>
     Object.values(state.products.entities)
   );
+  const productsBasket = useSelector(
+    (state: RootState) => state.cart.itemsInCart
+  );
 
-  const handleProductClick = (product: Product) => {
+  const handleProductClick = (e: React.MouseEvent, product: Product) => {
+    e.stopPropagation();
     dispatch(setSelectedProduct(product));
     navigate(`/items/${product.id}`);
+  };
+
+  const handleItemBasket = (e: React.MouseEvent, product: Product) => {
+    e.stopPropagation();
+    productsBasket.some((item) => item.id === product?.id)
+      ? dispatch(deleteItemFromCart(product?.id))
+      : dispatch(setItemInCart(product));
   };
 
   return (
@@ -29,7 +41,7 @@ export const NewItemsView = () => {
             <div
               className=""
               key={item.id}
-              onClick={() => handleProductClick(item)}
+              onClick={(e) => handleProductClick(e, item)}
             >
               <div
                 className="flex relative flex-col p-5 items-center w-full h-full min-h-[350px] hover:scale-105 transition-all cursor-pointer rounded-md bg-slate-700 text-white"
@@ -67,8 +79,19 @@ export const NewItemsView = () => {
                 </div>
                 <div className="flex items-center pt-5">
                   <Button
-                    text="Buy now"
-                    className="px-16 py-3 !bg-blue-500 !active:bg-blue-700 !hover:bg-blue-600"
+                    text={`${
+                      !productsBasket.some(
+                        (basketItem) => basketItem.id === item?.id
+                      )
+                        ? 'Buy now'
+                        : 'Delete from cart'
+                    }`}
+                    className={`px-16 py-3 ${
+                      productsBasket.some((basketItem) => basketItem.id === item?.id)
+                        ? '!bg-gray-500 !active:bg-gray-700 !hover:bg-gray-600'
+                        : '!bg-blue-500 !active:bg-blue-700 !hover:bg-blue-600'
+                    } `}
+                    onClick={(e) => handleItemBasket(e, item)}
                   />
                 </div>
               </div>

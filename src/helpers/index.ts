@@ -20,3 +20,6 @@ export const calcTotalPriceWithDiscount = (items: Product[]) => {
     });
     return totalPriceWithDiscount;
 };
+
+
+export const randomOrderNumber = Math.floor(Math.random() * 1000);

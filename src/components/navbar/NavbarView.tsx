@@ -32,22 +32,18 @@ export const NavbarView: React.FC = () => {
 
   return (
     <div className="bg-[#11101D] w-full h-full max-w-[260px] p-5">
-      <div>
-        <input
-          placeholder="Search..."
-          className="rounded-md px-4 py-2 bg-gray-400 placeholder:text-white outline-none text-white"
-        />
-      </div>
-      <div className="flex flex-col pt-12 gap-5 w-full mx-auto">
+      <div className="flex flex-col pt-8 gap-5 w-full mx-auto">
         {buttons.map((item) => (
           <div
-            className="flex flex-col mx-auto w-full max-w-[210px]"
+            className="flex flex-col mx-auto w-full max-w-[250px]"
             key={item.id}
           >
             <Button
               text={item.text}
               imgs={item.icon}
-              className={`${item.active ? 'bg-slate-400' : 'bg-transparent'}`}
+              className={`${
+                item.active ? 'bg-slate-400' : 'bg-transparent'
+              } px-6`}
               onClick={() => {
                 handleActiveButton(item.id);
                 item.id === 0 && handleProductClick();

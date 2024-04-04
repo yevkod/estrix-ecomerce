@@ -16,6 +16,9 @@ import { ItemsView } from '../../components/items/ItemsView';
 import { Basket } from '../../components/basket/Basket';
 import { OrderView } from '../../components/order/OrderView';
 import { AboutView } from '../../components/about/AboutView';
+import { randomOrderNumber } from '../../helpers';
+import { BankCard } from '../../components/BankCard/BankCard';
+import { useLocation } from 'react-router-dom';
 
 export const MainView = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -25,6 +28,7 @@ export const MainView = () => {
   );
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch(fetchProducts());
   }, []);
 
@@ -52,6 +56,10 @@ export const MainView = () => {
             <Route path="/products" element={<ItemsView />} />
             <Route path="/order" element={<OrderView />} />
             <Route path="/about" element={<AboutView />} />
+            <Route
+              path={`/payment/${randomOrderNumber}`}
+              element={<BankCard />}
+            />
           </Routes>
         </div>
         <div className="footer">

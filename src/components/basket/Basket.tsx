@@ -1,18 +1,20 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectSelectedProduct } from '../../store/selectedProductSlice';
 import { Button } from '../button/Button';
 import { Product } from '../../store/productsSlice';
 import { RootState } from '../../store';
-import { CartState } from '../../store/cartSlice';
+import { CartState, deleteItemFromCart } from '../../store/cartSlice';
 import {
   calcTotalPrice,
   calcTotalPriceWithDiscount,
   calculateDiscountedPrice,
 } from '../../helpers';
 import { useNavigate } from 'react-router';
+import cancelButton from '../../assets/imgs/cancel.svg';
 
 export const Basket = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const productsBasket = useSelector(
     (state: RootState) => state.cart.itemsInCart
@@ -20,6 +22,11 @@ export const Basket = () => {
 
   const handleNavigateOrder = () => {
     navigate('/order');
+  };
+
+  const handleCancelItem = (e: React.MouseEvent<HTMLImageElement>, id: number) => {
+    e.stopPropagation();
+    dispatch(deleteItemFromCart(id));
   };
 
   return (
@@ -34,14 +41,19 @@ export const Basket = () => {
                 <div>
                   <div className="text-[20px] font-bold">{product?.title}</div>
                 </div>
-                <div className="text-[20px] font-bold">
-                  {product?.price &&
-                    product?.discountPercentage &&
-                    calculateDiscountedPrice(
-                      product.price,
-                      product.discountPercentage
-                    ).discountedPrice.toFixed(0)}
-                  $
+                <div className="flex gap-3 items-center">
+                  <div className="text-[20px] font-bold">
+                    {product?.price &&
+                      product?.discountPercentage &&
+                      calculateDiscountedPrice(
+                        product.price,
+                        product.discountPercentage
+                      ).discountedPrice.toFixed(0)}
+                    $
+                  </div>
+                  <div className="flex cursor-pointer">
+                    <img className="flex w-4" src={cancelButton} alt="" onClick={(e) => handleCancelItem(e, product.id)}/>
+                  </div>
                 </div>
               </div>
             ))}
