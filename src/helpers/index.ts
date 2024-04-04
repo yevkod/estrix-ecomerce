@@ -25,3 +25,9 @@ export const calcTotalPriceWithDiscount = (items: Product[]) => {
 
 
 export const randomOrderNumber = Math.floor(Math.random() * 1000);
+
+export const SkeletonColorClasses = {
+    baseColor: 'rgba(255,255,255,.05)',
+    highlightColor: 'rgba(255,255,255,.2)',
+    mb: '6px',
+  };

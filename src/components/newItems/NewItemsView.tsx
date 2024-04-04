@@ -1,13 +1,14 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
-import { Product } from '../../store/productsSlice';
+import { Product, selectLoadingStatus } from '../../store/productsSlice';
 import StarRatings from 'react-star-ratings';
 import { setSelectedProduct } from '../../store/selectedProductSlice';
 import { Button } from '../button/Button';
 import { calculateDiscountedPrice } from '../../helpers';
 import { useNavigate } from 'react-router';
 import { deleteItemFromCart, setItemInCart } from '../../store/cartSlice';
+import Skeleton from 'react-loading-skeleton';
 
 export const NewItemsView = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -18,6 +19,8 @@ export const NewItemsView = () => {
   const productsBasket = useSelector(
     (state: RootState) => state.cart.itemsInCart
   );
+
+  const loadingStatus = useSelector(selectLoadingStatus);
 
   const handleProductClick = (e: React.MouseEvent, product: Product) => {
     e.stopPropagation();
@@ -36,7 +39,7 @@ export const NewItemsView = () => {
     <div className="relative">
       <div className="text-white text-[25px] mt-5 font-bold">New Arrivals</div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16 max-w-[90rem] mt-8 mx-auto">
-        {products.length > 0 &&
+        {products.length !== 0 ? (
           products[0].slice(0, 6)?.map((item: Product) => (
             <div
               className=""
@@ -86,7 +89,7 @@ export const NewItemsView = () => {
                         ? 'Buy now'
                         : 'Delete from cart'
                     }`}
-                    className={`px-16 py-3 ${
+                    className={`px-16 py-3 font-bold text-[20px] ${
                       productsBasket.some(
                         (basketItem) => basketItem.id === item?.id
                       )
@@ -98,7 +101,12 @@ export const NewItemsView = () => {
                 </div>
               </div>
             </div>
-          ))}
+          ))
+        ) : (
+          <>
+            <Skeleton height={270} className="rounded-xl" />
+          </>
+        )}
       </div>
     </div>
   );

@@ -10,6 +10,6 @@ export const navbarArray = [
         icon: icon_2, text: 'Products', active: false, id: 1
     },
     {
-        icon: icon_3, text: 'Contact', active: false, id: 2
+        icon: icon_3, text: 'Contacts', active: false, id: 2
     },
 ]

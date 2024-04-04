@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '.';
 
 export interface Product {
     [x: string]: any;
@@ -77,6 +78,8 @@ const productsSlice = createSlice({
             })
     }
 })
+
+export const selectLoadingStatus = (state: RootState) => state.products.loading;
 
 export const { productsReceived, productsRequestFailed } = productsSlice.actions;
 

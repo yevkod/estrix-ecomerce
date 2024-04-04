@@ -27,7 +27,10 @@ export const ProductDetailsView = () => {
     (state: RootState) => state.cart.itemsInCart
   );
 
-  const handleItemBasket = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, product: Product) => {
+  const handleItemBasket = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    product: Product
+  ) => {
     e.stopPropagation();
     productsBasket.some((item) => item.id === product?.id)
       ? dispatch(deleteItemFromCart(product?.id))
@@ -61,10 +64,10 @@ export const ProductDetailsView = () => {
             />{' '}
           </div>
           <div className="flex flex-col">
-            <div className="flex font-bold text-[20px] bg-red-500 max-w-[30%] justify-center p-2 mt-5 items-center rounded-lg">
+            <div className="flex font-bold text-[20px] bg-red-500 w-[50%] sm:w-[35%] justify-center p-2 mt-5 items-center rounded-lg">
               <div className="">-{selectedProduct?.discountPercentage} %</div>
             </div>
-            <div className="flex gap-8 pt-5 items-center font-bold text-[20px]">
+            <div className="flex gap-2 lg:gap-8 pt-5 items-center font-bold text-[20px]">
               {selectedProduct?.price &&
                 selectedProduct?.discountPercentage &&
                 calculateDiscountedPrice(
@@ -88,8 +91,10 @@ export const ProductDetailsView = () => {
                       ? '!bg-gray-500 !active:bg-gray-700 !hover:bg-gray-600'
                       : '!bg-blue-500 !active:bg-blue-700 !hover:bg-blue-600'
                   } `}
-                  onClick={(e) => selectedProduct && handleItemBasket(e, selectedProduct)}
-                  />
+                  onClick={(e) =>
+                    selectedProduct && handleItemBasket(e, selectedProduct)
+                  }
+                />
               </div>
             </div>
           </div>

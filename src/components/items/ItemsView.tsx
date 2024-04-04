@@ -84,7 +84,7 @@ export const ItemsView = () => {
                         ? 'Buy now'
                         : 'Delete from cart'
                     }`}
-                    className={`px-16 py-3 ${
+                    className={`px-16 font-bold text-[20px] py-3 ${
                       productsBasket.some(
                         (basketItem) => basketItem.id === item?.id
                       )

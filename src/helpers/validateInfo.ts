@@ -12,12 +12,12 @@ export interface FormValues {
     cardSecurityCode: string;
     cardNumber: number;
     focus: string;
-    isValid: boolean;
+    isValid?: boolean;
 }
 
 export default function validateInfo(values: FormValues) {
 
-    let errors: Errors = {
+    const errors: Errors = {
         message: "",
         variant: "",
         show: false,
@@ -30,7 +30,7 @@ export default function validateInfo(values: FormValues) {
         focus: ""
     };
 
-    let creditCard: FormValues = valid.number(values.cardNumber);
+    const creditCard: FormValues = valid.number(values.cardNumber);
 
     creditCard.expirationDate = valid.expirationDate(values.cardExpiration);
     creditCard.cvv = valid.cvv(values.cardSecurityCode);
