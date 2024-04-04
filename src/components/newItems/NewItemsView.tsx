@@ -35,7 +35,7 @@ export const NewItemsView = () => {
   return (
     <div className="relative">
       <div className="text-white text-[25px] mt-5 font-bold">New Arrivals</div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 max-w-[90rem] mt-8 mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16 max-w-[90rem] mt-8 mx-auto">
         {products.length > 0 &&
           products[0].slice(0, 6)?.map((item: Product) => (
             <div
@@ -87,7 +87,9 @@ export const NewItemsView = () => {
                         : 'Delete from cart'
                     }`}
                     className={`px-16 py-3 ${
-                      productsBasket.some((basketItem) => basketItem.id === item?.id)
+                      productsBasket.some(
+                        (basketItem) => basketItem.id === item?.id
+                      )
                         ? '!bg-gray-500 !active:bg-gray-700 !hover:bg-gray-600'
                         : '!bg-blue-500 !active:bg-blue-700 !hover:bg-blue-600'
                     } `}

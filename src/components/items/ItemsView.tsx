@@ -7,7 +7,7 @@ import { Product } from '../../store/productsSlice';
 import { useNavigate } from 'react-router';
 import { Button } from '../button/Button';
 import { calculateDiscountedPrice } from '../../helpers';
-import { setItemInCart } from '../../store/cartSlice';
+import { deleteItemFromCart, setItemInCart } from '../../store/cartSlice';
 
 export const ItemsView = () => {
   const navigate = useNavigate();
@@ -15,14 +15,20 @@ export const ItemsView = () => {
   const products = useSelector((state: RootState) =>
     Object.values(state.products.entities)
   );
+  const productsBasket = useSelector(
+    (state: RootState) => state.cart.itemsInCart
+  );
 
   const handleProductClick = (product: Product) => {
     dispatch(setSelectedProduct(product));
     navigate(`/items/${product.id}`);
   };
 
-  const addItemBasket = () => {
-    products !== null && dispatch(setItemInCart(products[0]));
+  const handleItemBasket = (e: React.MouseEvent, product: Product) => {
+    e.stopPropagation();
+    productsBasket.some((item) => item.id === product?.id)
+      ? dispatch(deleteItemFromCart(product?.id))
+      : dispatch(setItemInCart(product));
   };
 
   return (
@@ -71,9 +77,21 @@ export const ItemsView = () => {
                 </div>
                 <div className="flex items-center pt-5">
                   <Button
-                    text="Buy now"
-                    className="px-16 py-3 !bg-blue-500 !active:bg-blue-700 !hover:bg-blue-600"
-                    onClick={addItemBasket}
+                    text={`${
+                      !productsBasket.some(
+                        (basketItem) => basketItem.id === item?.id
+                      )
+                        ? 'Buy now'
+                        : 'Delete from cart'
+                    }`}
+                    className={`px-16 py-3 ${
+                      productsBasket.some(
+                        (basketItem) => basketItem.id === item?.id
+                      )
+                        ? '!bg-gray-500 !active:bg-gray-700 !hover:bg-gray-600'
+                        : '!bg-blue-500 !active:bg-blue-700 !hover:bg-blue-600'
+                    } `}
+                    onClick={(e) => handleItemBasket(e, item)}
                   />
                 </div>
               </div>

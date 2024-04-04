@@ -27,7 +27,8 @@ export const ProductDetailsView = () => {
     (state: RootState) => state.cart.itemsInCart
   );
 
-  const handleItemBasket = (product: Product) => {
+  const handleItemBasket = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, product: Product) => {
+    e.stopPropagation();
     productsBasket.some((item) => item.id === product?.id)
       ? dispatch(deleteItemFromCart(product?.id))
       : dispatch(setItemInCart(product));
@@ -87,7 +88,7 @@ export const ProductDetailsView = () => {
                       ? '!bg-gray-500 !active:bg-gray-700 !hover:bg-gray-600'
                       : '!bg-blue-500 !active:bg-blue-700 !hover:bg-blue-600'
                   } `}
-                  onClick={() => selectedProduct && handleItemBasket(selectedProduct)}
+                  onClick={(e) => selectedProduct && handleItemBasket(e, selectedProduct)}
                   />
               </div>
             </div>

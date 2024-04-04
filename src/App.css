@@ -55,6 +55,10 @@
 
 .navbar {
   grid-area: navbar;
+
+  @media screen and (max-width:764px) {
+    display: none;
+  }
 }
 
 .main {

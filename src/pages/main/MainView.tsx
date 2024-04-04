@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { HeaderView } from '../../components/header/HeaderView';
 import { NavbarView } from '../../components/navbar/NavbarView';
 import { FooterView } from '../../components/footer/FooterView';
@@ -9,23 +9,19 @@ import '@brainhubeu/react-carousel/lib/style.css';
 import '../../App.css';
 import { WelcomeView } from '../../components/welcome/WelcomeView';
 import { NewItemsView } from '../../components/newItems/NewItemsView';
-import { selectShowProductDetails } from '../../store/selectedProductSlice';
 import { ProductDetailsView } from '../../components/productDetails/ProductDetailsView';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ItemsView } from '../../components/items/ItemsView';
-import { Basket } from '../../components/basket/Basket';
 import { OrderView } from '../../components/order/OrderView';
 import { AboutView } from '../../components/about/AboutView';
 import { randomOrderNumber } from '../../helpers';
 import { BankCard } from '../../components/BankCard/BankCard';
-import { useLocation } from 'react-router-dom';
+import { BurgerMenuView } from '../../components/burgerMenu/BurgerMenuView';
 
 export const MainView = () => {
   const dispatch: AppDispatch = useDispatch();
-  const showProductDetails = useSelector(selectShowProductDetails);
-  const products = useSelector((state: RootState) =>
-    Object.values(state.products.entities)
-  );
+
+  const [menu, setMenu] = useState<boolean>(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -35,13 +31,18 @@ export const MainView = () => {
   return (
     <div className="MainView bg-gradient-to-t from-white to-black">
       <Router>
+        {menu && (
+          <div className="flex lg:hidden fixed rounded-lg z-[100000] top-[60px] right-0 flex-col shadow-md bg-[#11101D]">
+            <BurgerMenuView setMenu={setMenu} />
+          </div>
+        )}
         <div className="header z-[100]">
-          <HeaderView />
+          <HeaderView menu={menu} setMenu={setMenu} />
         </div>
         <div className="navbar">
           <NavbarView />
         </div>
-        <div className="flex flex-col min-h-screen p-16 main relative w-full">
+        <div className="flex flex-col min-h-screen p-5 lg:p-16 main relative w-full">
           <Routes>
             <Route
               path="/"

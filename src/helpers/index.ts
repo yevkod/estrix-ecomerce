@@ -1,4 +1,6 @@
+import { useSelector } from "react-redux";
 import { Product } from "../store/productsSlice";
+import { RootState } from "../store";
 
 export const calculateDiscountedPrice = (price: number, discountPercentage: number) => {
     const discountedPrice = price * (1 - discountPercentage / 100);

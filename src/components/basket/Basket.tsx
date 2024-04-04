@@ -24,22 +24,27 @@ export const Basket = () => {
     navigate('/order');
   };
 
-  const handleCancelItem = (e: React.MouseEvent<HTMLImageElement>, id: number) => {
+  const handleCancelItem = (
+    e: React.MouseEvent<HTMLImageElement>,
+    id: number
+  ) => {
     e.stopPropagation();
     dispatch(deleteItemFromCart(id));
   };
 
   return (
-    <div className="flex flex-col rounded-lg text-white min-w-[400px] bg-gray-800 w-full p-5 max-w-[340px]">
+    <div className="flex flex-col rounded-lg text-white w-full min-w-[250px] lg:min-w-[400px] bg-gray-800 p-5">
       {productsBasket?.length === 0 ? (
         <div className="text-white">Your cart is empty</div>
       ) : (
         <>
           {productsBasket.length !== 0 &&
             productsBasket?.map((product: Product) => (
-              <div className="flex justify-between pt-3">
+              <div className="flex justify-between gap-3 pt-3 break-all">
                 <div>
-                  <div className="text-[20px] font-bold">{product?.title}</div>
+                  <div className="text-[20px] font-bold text-left">
+                    {product?.title}
+                  </div>
                 </div>
                 <div className="flex gap-3 items-center">
                   <div className="text-[20px] font-bold">
@@ -52,7 +57,12 @@ export const Basket = () => {
                     $
                   </div>
                   <div className="flex cursor-pointer">
-                    <img className="flex w-4" src={cancelButton} alt="" onClick={(e) => handleCancelItem(e, product.id)}/>
+                    <img
+                      className="flex w-4"
+                      src={cancelButton}
+                      alt=""
+                      onClick={(e) => handleCancelItem(e, product.id)}
+                    />
                   </div>
                 </div>
               </div>
