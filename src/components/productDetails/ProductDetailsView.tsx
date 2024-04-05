@@ -2,10 +2,9 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectSelectedProduct,
-  selectShowProductDetails,
 } from '../../store/selectedProductSlice';
 import StarRatings from 'react-star-ratings';
-import Carousel, { autoplayPlugin } from '@brainhubeu/react-carousel';
+import Carousel from '@brainhubeu/react-carousel';
 import { AppDispatch, RootState } from '../../store';
 import { Product } from '../../store/productsSlice';
 import { calculateDiscountedPrice } from '../../helpers';

@@ -51,7 +51,7 @@ export const BankCard = () => {
                 <Cards
                   cvc={values.cardSecurityCode}
                   expiry={values.cardExpiration}
-                  focused={values.focus}
+                  focused={values.focus === 'cvc' ? 'cvc' : undefined}
                   name={values.cardName}
                   number={values.cardNumber}
                 />
