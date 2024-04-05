@@ -55,9 +55,9 @@ export const HeaderView: React.FC<HeaderViewProps> = ({ menu, setMenu }) => {
         </div>
         <div
           className="flex relative gap-3 cursor-pointer"
-          onClick={handleShowBasketClick}
+
         >
-          <img src={basket} alt="" className="w-8" />
+          <img src={basket} alt="" className="w-8" onClick={handleShowBasketClick}/>
           {productsBasket.length !== 0 && (
             <div className="flex absolute items-center text-white text-center justify-center bg-red-500 w-6 rounded-full">
               {productsBasket.length}
