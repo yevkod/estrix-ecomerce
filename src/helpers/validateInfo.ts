@@ -34,7 +34,6 @@ export default function validateInfo(values: FormValues) {
         cexp: false,
         ccvv: false,
         cpostal: false,
-        focus: '',
     };
 
     const creditCard: FormValues = {
