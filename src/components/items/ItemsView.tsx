@@ -3,11 +3,13 @@ import StarRatings from 'react-star-ratings';
 import { AppDispatch, RootState } from '../../store';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedProduct } from '../../store/selectedProductSlice';
-import { Product } from '../../store/productsSlice';
+import { Product, selectLoadingStatus } from '../../store/productsSlice';
 import { useNavigate } from 'react-router';
 import { Button } from '../button/Button';
 import { calculateDiscountedPrice } from '../../helpers';
 import { deleteItemFromCart, setItemInCart } from '../../store/cartSlice';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 export const ItemsView = () => {
   const navigate = useNavigate();
@@ -24,6 +26,8 @@ export const ItemsView = () => {
     navigate(`/items/${product.id}`);
   };
 
+  const loadingStatus = useSelector(selectLoadingStatus);
+
   const handleItemBasket = (e: React.MouseEvent, product: Product) => {
     e.stopPropagation();
     productsBasket.some((item) => item.id === product?.id)
@@ -34,7 +38,17 @@ export const ItemsView = () => {
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 max-w-[90rem] mt-8 mx-auto">
-        {products.length > 0 &&
+        {loadingStatus === true ? (
+          <>
+            <Skeleton height={270} className="rounded-xl" />
+            <Skeleton height={270} className="rounded-xl" />
+            <Skeleton height={270} className="rounded-xl" />
+            <Skeleton height={270} className="rounded-xl" />
+            <Skeleton height={270} className="rounded-xl" />
+            <Skeleton height={270} className="rounded-xl" />
+          </>
+        ) : (
+          products.length > 0 &&
           products[0]?.map((item: Product) => (
             <div
               className=""
@@ -96,7 +110,8 @@ export const ItemsView = () => {
                 </div>
               </div>
             </div>
-          ))}
+          ))
+        )}
       </div>
     </div>
   );

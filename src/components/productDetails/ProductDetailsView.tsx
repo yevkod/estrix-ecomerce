@@ -13,16 +13,11 @@ import { Button } from '../button/Button';
 import {
   deleteItemFromCart,
   setItemInCart,
-  CartState,
 } from '../../store/cartSlice';
 
 export const ProductDetailsView = () => {
   const selectedProduct = useSelector(selectSelectedProduct);
   const dispatch: AppDispatch = useDispatch();
-  const showProductDetails = useSelector(selectShowProductDetails);
-  const products = useSelector((state: RootState) =>
-    Object.values(state.products.entities)
-  );
   const productsBasket = useSelector(
     (state: RootState) => state.cart.itemsInCart
   );

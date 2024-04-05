@@ -9,6 +9,7 @@ import { calculateDiscountedPrice } from '../../helpers';
 import { useNavigate } from 'react-router';
 import { deleteItemFromCart, setItemInCart } from '../../store/cartSlice';
 import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 export const NewItemsView = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -39,7 +40,17 @@ export const NewItemsView = () => {
     <div className="relative">
       <div className="text-white text-[25px] mt-5 font-bold">New Arrivals</div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16 max-w-[90rem] mt-8 mx-auto">
-        {products.length !== 0 ? (
+        {loadingStatus === true ? (
+          <>
+            <Skeleton height={270} className="rounded-xl" />
+            <Skeleton height={270} className="rounded-xl" />
+            <Skeleton height={270} className="rounded-xl" />
+            <Skeleton height={270} className="rounded-xl" />
+            <Skeleton height={270} className="rounded-xl" />
+            <Skeleton height={270} className="rounded-xl" />
+          </>
+        ) : (
+          products.length !== 0 &&
           products[0].slice(0, 6)?.map((item: Product) => (
             <div
               className=""
@@ -102,10 +113,6 @@ export const NewItemsView = () => {
               </div>
             </div>
           ))
-        ) : (
-          <>
-            <Skeleton height={270} className="rounded-xl" />
-          </>
         )}
       </div>
     </div>

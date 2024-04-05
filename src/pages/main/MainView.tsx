@@ -10,7 +10,12 @@ import '../../App.css';
 import { WelcomeView } from '../../components/welcome/WelcomeView';
 import { NewItemsView } from '../../components/newItems/NewItemsView';
 import { ProductDetailsView } from '../../components/productDetails/ProductDetailsView';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  useNavigate,
+} from 'react-router-dom';
 import { ItemsView } from '../../components/items/ItemsView';
 import { OrderView } from '../../components/order/OrderView';
 import { AboutView } from '../../components/about/AboutView';
@@ -21,7 +26,6 @@ import { SkeletonTheme } from 'react-loading-skeleton';
 
 export const MainView = () => {
   const dispatch: AppDispatch = useDispatch();
-
   const [menu, setMenu] = useState<boolean>(false);
 
   useEffect(() => {
@@ -36,7 +40,7 @@ export const MainView = () => {
         highlightColor={SkeletonColorClasses.highlightColor}
         enableAnimation
       >
-        <Router>
+        <BrowserRouter>
           {menu && (
             <div className="flex lg:hidden fixed rounded-lg z-[100000] top-[60px] right-0 flex-col shadow-md bg-[#11101D]">
               <BurgerMenuView setMenu={setMenu} />
@@ -72,7 +76,7 @@ export const MainView = () => {
           <div className="footer">
             <FooterView />
           </div>
-        </Router>
+        </BrowserRouter>
       </SkeletonTheme>
     </div>
   );
