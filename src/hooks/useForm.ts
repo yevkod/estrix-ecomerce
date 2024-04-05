@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import validateInfo, { FormValues } from '../helpers/validateInfo';
+import { Focused } from 'react-credit-cards';
 
 export interface Errors {
     message: string;
@@ -11,7 +12,7 @@ export interface Errors {
     cexp: boolean;
     ccvv: boolean;
     cpostal: boolean;
-    focus: string | undefined;
+    focus?: Focused | '';
 }
 
 export const useForm = () => {
@@ -40,7 +41,7 @@ export const useForm = () => {
             isValid: false,
             isPotentiallyValid: false,
         },
-        focus: ''
+        focus: undefined,
     })
 
     const [errors, setErrors] = useState({})
@@ -48,7 +49,7 @@ export const useForm = () => {
     const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
         setValues({
             ...values,
-            focus: (e.target.name === 'cardSecurityCode') ? 'cvc' : e.target.name
+            focus: (e.target.name === 'cardSecurityCode') ? 'cvc' : (e.target.name as Focused)
         });
     }
 

@@ -2,6 +2,7 @@ import valid from "card-validator";
 import { Errors } from "../hooks/useForm";
 import { ExpirationDateVerification } from "card-validator/dist/expiration-date";
 import { Verification } from "card-validator/dist/types";
+import { Focused } from "react-credit-cards";
 
 export interface FormValues {
     card?: {
@@ -16,7 +17,7 @@ export interface FormValues {
     postalCode: Verification;
     cardSecurityCode: string;
     cardNumber: string;
-    focus: string;
+    focus: Focused | undefined;
     isValid?: boolean;
     cardType: string;
 }
@@ -33,7 +34,7 @@ export default function validateInfo(values: FormValues) {
         cexp: false,
         ccvv: false,
         cpostal: false,
-        focus: ""
+        focus: '',
     };
 
     const creditCard: FormValues = {
