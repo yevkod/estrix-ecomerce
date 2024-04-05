@@ -32,7 +32,7 @@ export const NavbarView: React.FC = () => {
 
   return (
     <div className="bg-[#11101D] w-full h-full max-w-[260px] p-5">
-      <div className="flex flex-col pt-8 gap-5 w-full mx-auto">
+      <div className="flex flex-col pt-20 gap-5 w-full mx-auto">
         {buttons.map((item) => (
           <div
             className="flex flex-col mx-auto w-full max-w-[250px]"

@@ -37,7 +37,7 @@ export const HeaderView: React.FC<HeaderViewProps> = ({ menu, setMenu }) => {
   };
 
   return (
-    <div className="w-full relative h-[80px] p-3 bg-[#11101D]">
+    <div className="w-full fixed h-[80px] p-3 bg-[#11101D]">
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           <div className="cursor-pointer">
@@ -53,11 +53,13 @@ export const HeaderView: React.FC<HeaderViewProps> = ({ menu, setMenu }) => {
             <img src={menu_left} alt="" />
           </div>
         </div>
-        <div
-          className="flex relative gap-3 cursor-pointer"
-
-        >
-          <img src={basket} alt="" className="w-8" onClick={handleShowBasketClick}/>
+        <div className="flex relative gap-3 cursor-pointer">
+          <img
+            src={basket}
+            alt=""
+            className="w-8"
+            onClick={handleShowBasketClick}
+          />
           {productsBasket.length !== 0 && (
             <div className="flex absolute items-center text-white text-center justify-center bg-red-500 w-6 rounded-full">
               {productsBasket.length}
@@ -72,7 +74,7 @@ export const HeaderView: React.FC<HeaderViewProps> = ({ menu, setMenu }) => {
         </div>
         {showBasket && (
           <div className="absolute right-10 top-20 z-[100]">
-            <Basket/>
+            <Basket />
           </div>
         )}
       </div>
