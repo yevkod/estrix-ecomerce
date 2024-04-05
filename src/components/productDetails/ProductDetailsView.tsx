@@ -42,7 +42,7 @@ export const ProductDetailsView = () => {
             ))}
           </Carousel>
         </div>
-        <div className="flex flex-col text-white self-start text-left bg-gray-800 rounded-xl p-8">
+        <div className="flex flex-col text-white self-start text-left bg-gray-800 rounded-xl p-8" key={selectedProduct?.id}>
           <div className="text-[30px] font-bold">{selectedProduct?.title}</div>
           <div className="text-[20px] pt-5 font-semibold">
             {selectedProduct?.brand}
@@ -96,8 +96,8 @@ export const ProductDetailsView = () => {
         </div>
       </div>
       <div className="flex flex-col gap-8 pt-10 max-w-[90rem] mx-auto">
-        {selectedProduct?.images.map((item) => (
-          <div className="gap-5">
+        {selectedProduct?.images.map((item, index) => (
+          <div className="gap-5" key={index}>
             <img src={item} alt="" />
           </div>
         ))}
