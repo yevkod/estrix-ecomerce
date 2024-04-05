@@ -1,19 +1,18 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectSelectedProduct } from '../../store/selectedProductSlice';
 import { Button } from '../button/Button';
 import { Product } from '../../store/productsSlice';
 import { RootState } from '../../store';
-import { CartState, deleteItemFromCart } from '../../store/cartSlice';
+import { deleteItemFromCart, setShowBasket } from '../../store/cartSlice';
 import {
-  calcTotalPrice,
   calcTotalPriceWithDiscount,
   calculateDiscountedPrice,
 } from '../../helpers';
 import { useNavigate } from 'react-router';
 import cancelButton from '../../assets/imgs/cancel.svg';
 
-export const Basket = () => {
+
+export const Basket= () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const productsBasket = useSelector(
@@ -21,6 +20,7 @@ export const Basket = () => {
   );
 
   const handleNavigateOrder = () => {
+    dispatch(setShowBasket(false));
     navigate('/order');
   };
 

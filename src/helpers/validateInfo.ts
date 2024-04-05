@@ -1,18 +1,24 @@
 import valid from "card-validator";
 import { Errors } from "../hooks/useForm";
+import { ExpirationDateVerification } from "card-validator/dist/expiration-date";
+import { Verification } from "card-validator/dist/types";
 
 export interface FormValues {
-    expirationDate: string;
-    cvv: string;
-    cardholderName: string;
+    card?: {
+        type?: string;
+    };
+    expirationDate: ExpirationDateVerification;
+    cvv: Verification;
+    cardholderName: Verification;
     cardExpiration: string;
     cardPostalCode: string;
     cardName: string;
-    postalCode: string;
+    postalCode: Verification;
     cardSecurityCode: string;
-    cardNumber: number;
+    cardNumber: string;
     focus: string;
     isValid?: boolean;
+    cardType: string;
 }
 
 export default function validateInfo(values: FormValues) {
@@ -30,7 +36,20 @@ export default function validateInfo(values: FormValues) {
         focus: ""
     };
 
-    const creditCard: FormValues = valid.number(values.cardNumber);
+    const creditCard: FormValues = {
+        expirationDate: valid.expirationDate(values.cardExpiration),
+        cvv: valid.cvv(values.cardSecurityCode),
+        cardholderName: valid.cardholderName(values.cardName),
+        cardExpiration: values.cardExpiration,
+        cardPostalCode: values.cardPostalCode,
+        cardName: values.cardName,
+        postalCode: valid.postalCode(values.cardPostalCode),
+        cardSecurityCode: values.cardSecurityCode,
+        cardNumber: values.cardNumber,
+        focus: values.focus,
+        isValid: values.isValid,
+        cardType: values.cardType,
+    };
 
     creditCard.expirationDate = valid.expirationDate(values.cardExpiration);
     creditCard.cvv = valid.cvv(values.cardSecurityCode);
@@ -77,11 +96,13 @@ export default function validateInfo(values: FormValues) {
     if (
         values.cardType === null ||
         !values.cardType.trim() ||
-        creditCard.card === null
+        creditCard === undefined ||
+        creditCard.card === undefined ||
+        creditCard.card?.type === undefined
     ) {
         errors.message = "Credit card type is not complete";
     } else if (
-        creditCard.card.type &&
+        creditCard.card?.type &&
         creditCard.card.type.toUpperCase() === values.cardType.toUpperCase()
     ) {
         errors.ctype = true;

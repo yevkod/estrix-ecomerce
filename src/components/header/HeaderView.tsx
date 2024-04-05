@@ -3,7 +3,6 @@ import logo_icon from '../../assets/imgs/logo-icon.png';
 import menu_left from '../../assets/imgs/menu-left.svg';
 import basket from '../../assets/imgs/basket.svg';
 import { clearSelectedProduct } from '../../store/selectedProductSlice';
-import { Product } from '../../store/productsSlice';
 import burger from '../../assets/imgs/burgerIcon.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
@@ -19,7 +18,6 @@ interface HeaderViewProps {
 export const HeaderView: React.FC<HeaderViewProps> = ({ menu, setMenu }) => {
   const dispatch: AppDispatch = useDispatch();
   const showBasket = useSelector((state: RootState) => state.cart.showBasket);
-  const showBasketView = useSelector(setShowBasket);
   const navigate = useNavigate();
   const productsBasket = useSelector(
     (state: RootState) => state.cart.itemsInCart
@@ -74,7 +72,7 @@ export const HeaderView: React.FC<HeaderViewProps> = ({ menu, setMenu }) => {
         </div>
         {showBasket && (
           <div className="absolute right-10 top-20 z-[100]">
-            <Basket />
+            <Basket/>
           </div>
         )}
       </div>

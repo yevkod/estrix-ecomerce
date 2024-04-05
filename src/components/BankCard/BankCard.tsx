@@ -78,7 +78,7 @@ export const BankCard = () => {
                     data-testid="cardNumber"
                     name="cardNumber"
                     placeholder="Card Number"
-                    value={values.cardNumber}
+                    value={values.cardNumber || ''}
                     onChange={handleChange}
                     onFocus={handleFocus}
                     isValid={(errors as Errors).cnumb}
@@ -128,7 +128,7 @@ export const BankCard = () => {
                         data-testid="cardSecurityCode"
                         name="cardSecurityCode"
                         placeholder="Security Code"
-                        value={values.cardSecurityCode}
+                        value={values.cardSecurityCode || ''}
                         onChange={handleChange}
                         onFocus={handleFocus}
                         isValid={(errors as Errors).ccvv}

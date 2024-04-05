@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import validateInfo from '../helpers/validateInfo';
+import validateInfo, { FormValues } from '../helpers/validateInfo';
 
 export interface Errors {
     message: string;
@@ -15,17 +15,31 @@ export interface Errors {
 }
 
 export const useForm = () => {
-    const [values, setValues] = useState({
+    const [values, setValues] = useState<FormValues>({
         cardName: '',
         cardNumber: '',
         cardType: '',
         cardExpiration: '',
         cardSecurityCode: '',
         cardPostalCode: '',
-        expirationDate: '',
-        cvv: '',
-        cardholderName: '',
-        postalCode: '',
+        expirationDate: {
+            isValid: false,
+            isPotentiallyValid: false,
+            month: '',
+            year: ''
+        },
+        cvv: {
+            isValid: false,
+            isPotentiallyValid: false,
+        },
+        cardholderName: {
+            isValid: false,
+            isPotentiallyValid: false,
+        },
+        postalCode: {
+            isValid: false,
+            isPotentiallyValid: false,
+        },
         focus: ''
     })
 
