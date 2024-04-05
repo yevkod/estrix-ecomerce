@@ -13,10 +13,10 @@ export const AboutView = () => {
         Drop Us<br></br> An Email. Our Staff Always Be There To Help You Out. Do
         Not Hesitate!
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 pt-16">
-        <div className="flex flex-col items-start gap-8 text-white justify-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-16">
+        <div className="flex flex-col items-start gap-8 mx-auto md:mx-0 text-white justify-center">
           {aboutArray.map((item) => (
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col text-center gap-2">
               <div className="w-10">
                 <img src={item.icon} alt="" />
               </div>
@@ -29,7 +29,7 @@ export const AboutView = () => {
             </div>
           ))}
         </div>
-        <div className="flex flex-col text-left mx-auto gap-5 text-white">
+        <div className="flex flex-col text-left gap-5 mx-auto md:mx-0 pt-10 md:pt-0 text-white">
           <div className="flex flex-col gap-3">
             <div>Your name</div>
             <div>
