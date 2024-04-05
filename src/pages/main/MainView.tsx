@@ -10,12 +10,7 @@ import '../../App.css';
 import { WelcomeView } from '../../components/welcome/WelcomeView';
 import { NewItemsView } from '../../components/newItems/NewItemsView';
 import { ProductDetailsView } from '../../components/productDetails/ProductDetailsView';
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  useNavigate,
-} from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import { ItemsView } from '../../components/items/ItemsView';
 import { OrderView } from '../../components/order/OrderView';
 import { AboutView } from '../../components/about/AboutView';
@@ -52,7 +47,7 @@ export const MainView = () => {
           <div className="navbar">
             <NavbarView />
           </div>
-          <div className="flex flex-col min-h-screen p-3 lg:p-16 main relative w-full">
+          <div className="flex flex-col min-h-screen p-3 mt-10 lg:p-16 main relative w-full">
             <Routes>
               <Route
                 path="/"

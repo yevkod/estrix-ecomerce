@@ -1,18 +1,13 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectSelectedProduct,
-} from '../../store/selectedProductSlice';
+import { selectSelectedProduct } from '../../store/selectedProductSlice';
 import StarRatings from 'react-star-ratings';
 import Carousel from '@brainhubeu/react-carousel';
 import { AppDispatch, RootState } from '../../store';
 import { Product } from '../../store/productsSlice';
 import { calculateDiscountedPrice } from '../../helpers';
 import { Button } from '../button/Button';
-import {
-  deleteItemFromCart,
-  setItemInCart,
-} from '../../store/cartSlice';
+import { deleteItemFromCart, setItemInCart } from '../../store/cartSlice';
 
 export const ProductDetailsView = () => {
   const selectedProduct = useSelector(selectSelectedProduct);
@@ -33,7 +28,7 @@ export const ProductDetailsView = () => {
 
   return (
     <div className="min-h-screen">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 max-w-[90rem] mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-2 pt-12 gap-5 max-w-[90rem] mx-auto">
         <div className="">
           <Carousel plugins={['arrows', 'infinite']}>
             {selectedProduct?.images?.map((image: string, index: number) => (
@@ -41,7 +36,10 @@ export const ProductDetailsView = () => {
             ))}
           </Carousel>
         </div>
-        <div className="flex flex-col text-white self-start text-left bg-gray-800 rounded-xl p-8" key={selectedProduct?.id}>
+        <div
+          className="flex flex-col text-white self-start text-left bg-gray-800 rounded-xl p-8"
+          key={selectedProduct?.id}
+        >
           <div className="text-[30px] font-bold">{selectedProduct?.title}</div>
           <div className="text-[20px] pt-5 font-semibold">
             {selectedProduct?.brand}

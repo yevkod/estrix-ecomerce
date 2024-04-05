@@ -56,21 +56,21 @@ export const OrderView = () => {
         </>
       ) : (
         <div>
-          <div className="flex justify-between border-b-2 p-3 mt-10 border-gray-500">
-            <div className="flex text-white text-[25px] font-bold">
+          <div className="flex justify-between items-center border-b-2 p-3 mt-10 border-gray-500">
+            <div className="flex text-white text-[14px] lg:text-[25px] font-bold">
               Your order: #{randomOrderNumber}
             </div>
             <div className="flex items-center gap-3">
-              <div className="flex items-center font-bold text-[18px]">
+              <div className="flex items-center font-bold text-[14px] lg:text-[18px]">
                 Total:{' '}
               </div>
               <div className="flex items-center gap-5">
-                <div className="font-bold text-[18px]">
+                <div className="font-bold text-[14px] lg:text-[18px]">
                   {calcTotalPriceWithDiscount(productsBasket).toFixed(0)}$
                 </div>
                 <Button
                   text="MAKE ORDER"
-                  className="px-16 py-3 !bg-blue-500 justify-center !active:bg-blue-700 !hover:bg-blue-600"
+                  className="px-16 text-[14px] lg:text-[16px] py-3 !bg-blue-500 justify-center !active:bg-blue-700 !hover:bg-blue-600"
                   onClick={(
                     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
                   ) => handlePaymentNavigate(e)}
@@ -85,7 +85,7 @@ export const OrderView = () => {
                   className="flex rounded-lg bg-gray-500 gap-5 p-3 hover:scale-105 cursor-pointer transition-all items-center justify-between"
                   onClick={() => handleNavigateToProduct(product)}
                 >
-                  <div className="flex w-36">
+                  <div className="flex w-20 lg:w-36">
                     <img src={product.images[0]} alt="" />
                   </div>
                   <div className="flex">

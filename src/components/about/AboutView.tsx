@@ -4,7 +4,7 @@ import { Button } from '../button/Button';
 
 export const AboutView = () => {
   return (
-    <div className="bg-slate-500 rounded-lg p-16 max-w-[90rem] mx-auto">
+    <div className="bg-slate-500 rounded-lg p-16 mt-16 max-w-[90rem] mx-auto">
       <div className="text-white text-[20px] font-bold">
         Get In Touch With Us
       </div>
