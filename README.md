@@ -1,3 +1,5 @@
+![image](https://github.com/yevkod/estrix-ecommerce/assets/94803570/1468d7ce-c08a-4432-86b8-1b11ddb4c4e7)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
