@@ -154,7 +154,7 @@ export const BankCard = () => {
                   </Col>
                 </Row>
                 <Button
-                  size={'block'}
+                  size={'lg'}
                   data-testid="validateButton"
                   id="validateButton"
                   type="submit"
